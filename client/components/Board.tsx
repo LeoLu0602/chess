@@ -15,6 +15,11 @@ export default function Board() {
         ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
         ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
     ]);
+    const [chosen, setChosen] = useState<number | null>(null); // 0 - 63
+
+    function choose(num: number) {
+        setChosen(num);
+    }
 
     const boardHTML = new Array(8);
 
@@ -22,7 +27,16 @@ export default function Board() {
         const row = new Array(8);
 
         for (let j = 0; j < 8; j++) {
-            row[j] = <Cell key={j} r={i} c={j} type={board[i][j]} />;
+            row[j] = (
+                <Cell
+                    key={j}
+                    r={i}
+                    c={j}
+                    type={board[i][j]}
+                    choose={choose}
+                    isChosen={chosen === i * 8 + j}
+                />
+            );
         }
 
         boardHTML[i] = (
