@@ -7,12 +7,14 @@ export default function Cell({
     type,
     choose,
     isChosen,
+    isLegalMove,
 }: {
     r: number;
     c: number;
     type: CellType;
     choose: (num: number) => void;
     isChosen: boolean;
+    isLegalMove: boolean;
 }) {
     const isDark: boolean =
         (r % 2 === 0 && c % 2 === 1) || (r % 2 === 1 && c % 2 === 0);

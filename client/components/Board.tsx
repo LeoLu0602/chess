@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { getLegalMoves } from '@/utils';
 import { CellType } from '@/types';
 import Cell from '@/components/Cell';
 
@@ -16,6 +17,7 @@ export default function Board() {
         ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
     ]);
     const [chosen, setChosen] = useState<number | null>(null); // 0 - 63
+    const [legalMoves, setLegalMoves] = useState<number[]>([40, 42]); //0 - 63
 
     function choose(num: number) {
         setChosen(num);
@@ -35,6 +37,7 @@ export default function Board() {
                     type={board[i][j]}
                     choose={choose}
                     isChosen={chosen === i * 8 + j}
+                    isLegalMove={new Set(legalMoves).has(i * 8 + j)}
                 />
             );
         }
